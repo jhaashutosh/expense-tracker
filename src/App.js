@@ -1,12 +1,21 @@
-import logo from "./logo.svg";
-import ExpenseItem from "./components/ExpenseItem";
+import React, { useState } from "react";
+import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
+import dummyExpenses from "./Data/dummyExpenses";
 
-function App() {
+const App = () => {
+  const [expenses, setExpenses] = useState(dummyExpenses);
+  const addExpenseHandler = (expense) => {
+    setExpenses((prevData) => {
+      return [expense, ...prevData];
+    });
+  };
   return (
     <div>
-      <ExpenseItem />
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses items={expenses} />
     </div>
   );
-}
+};
 
 export default App;
